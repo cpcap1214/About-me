@@ -37,4 +37,52 @@ window.addEventListener('scroll', () => {
 // 添加頁面載入動畫
 document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.add('loaded');
+    
+    // 添加滾動顯示動畫
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('fade-in');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+    
+    // 觀察所有需要動畫的元素
+    document.querySelectorAll('.about-content, .project-card, .contact-content').forEach(el => {
+        observer.observe(el);
+    });
+});
+
+// 添加技能標籤動畫
+document.querySelectorAll('.skill-tag').forEach(tag => {
+    tag.addEventListener('mouseover', () => {
+        tag.style.transform = 'scale(1.1)';
+        tag.style.backgroundColor = 'var(--primary-color)';
+        tag.style.color = 'white';
+    });
+    
+    tag.addEventListener('mouseout', () => {
+        tag.style.transform = 'scale(1)';
+        tag.style.backgroundColor = '';
+        tag.style.color = '';
+    });
+});
+
+// 添加專案卡片懸停效果
+document.querySelectorAll('.project-card').forEach(card => {
+    card.addEventListener('mouseenter', () => {
+        card.style.transform = 'translateY(-10px)';
+        card.style.boxShadow = '0 15px 30px rgba(0, 0, 0, 0.1)';
+    });
+    
+    card.addEventListener('mouseleave', () => {
+        card.style.transform = 'translateY(0)';
+        card.style.boxShadow = '';
+    });
 }); 

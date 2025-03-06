@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的個人網站</title>
+    <title>鍾心哲的個人網站</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <header>
         <nav>
             <div class="nav-container">
-                <div class="logo">我的名字</div>
+                <div class="logo">鍾心哲</div>
                 <ul class="nav-links">
                     <li><a href="#home">首頁</a></li>
                     <li><a href="#about">關於我</a></li>
@@ -25,38 +26,94 @@
         <section id="home" class="hero">
             <div class="hero-content">
                 <h1>歡迎來到我的個人網站</h1>
-                <p>我是一名軟體工程師</p>
+                <p>我是一名充滿熱情的軟體工程師</p>
+                <div class="hero-buttons">
+                    <a href="#about" class="btn primary">了解更多</a>
+                    <a href="#contact" class="btn secondary">聯絡我</a>
+                </div>
             </div>
         </section>
 
         <section id="about" class="about">
             <h2>關於我</h2>
             <div class="about-content">
-                <p>在這裡寫入您的個人介紹...</p>
+                <div class="about-text">
+                    <p>我是一名熱愛創新的軟體工程師，專注於開發優質的網頁和移動應用程式。我擅長前端開發，並且持續學習新的技術。</p>
+                    <div class="skills">
+                        <span class="skill-tag">SwiftUI</span>
+                        <span class="skill-tag">iOS 開發</span>
+                        <span class="skill-tag">Firebase</span>
+                        <span class="skill-tag">HTML5</span>
+                        <span class="skill-tag">CSS3</span>
+                        <span class="skill-tag">JavaScript</span>
+                    </div>
+                </div>
             </div>
         </section>
 
         <section id="projects" class="projects">
             <h2>我的專案</h2>
             <div class="project-grid">
-                <!-- 專案卡片將在這裡添加 -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://via.placeholder.com/300x200" alt="TimeTable 專案預覽">
+                    </div>
+                    <div class="project-content">
+                        <h3>TimeTable</h3>
+                        <p>一個使用 SwiftUI 開發的課程表應用程式，支援多所大學的課程查詢和個人課表管理。</p>
+                        <div class="project-links">
+                            <a href="#" target="_blank"><i class="fab fa-github"></i> 查看代碼</a>
+                            <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> App Store</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://via.placeholder.com/300x200" alt="Cupid 專案預覽">
+                    </div>
+                    <div class="project-content">
+                        <h3>Cupid</h3>
+                        <p>一個社交配對應用程式，幫助用戶找到志同道合的朋友。</p>
+                        <div class="project-links">
+                            <a href="#" target="_blank"><i class="fab fa-github"></i> 查看代碼</a>
+                            <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> 演示</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://via.placeholder.com/300x200" alt="GPA Calculator 專案預覽">
+                    </div>
+                    <div class="project-content">
+                        <h3>GPA Calculator</h3>
+                        <p>一個幫助學生計算和管理 GPA 的工具應用程式。</p>
+                        <div class="project-links">
+                            <a href="#" target="_blank"><i class="fab fa-github"></i> 查看代碼</a>
+                            <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> App Store</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
         <section id="contact" class="contact">
             <h2>聯絡方式</h2>
             <div class="contact-content">
-                <p>Email: your.email@example.com</p>
+                <div class="contact-info">
+                    <p><i class="fas fa-envelope"></i> Email: cpcap1214@gmail.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 地點: 台北市</p>
+                </div>
                 <div class="social-links">
-                    <a href="#" target="_blank">GitHub</a>
-                    <a href="#" target="_blank">LinkedIn</a>
+                    <a href="https://github.com/cpcap1214" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                    <a href="#" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    <a href="#" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
                 </div>
             </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2024 我的個人網站. All rights reserved.</p>
+        <p>&copy; 2024 鍾心哲的個人網站. All rights reserved.</p>
     </footer>
 
     <script src="script.js"></script>
