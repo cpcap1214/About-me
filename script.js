@@ -2,36 +2,25 @@
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth'
-            });
-        }
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
     });
 });
 
 // 導航欄滾動效果
-let lastScroll = 0;
+let lastScrollTop = 0;
 const header = document.querySelector('header');
 
 window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     
-    if (currentScroll <= 0) {
-        header.style.transform = 'translateY(0)';
-        return;
-    }
-    
-    if (currentScroll > lastScroll && !header.classList.contains('scroll-down')) {
-        // 向下滾動
+    if (scrollTop > lastScrollTop) {
         header.style.transform = 'translateY(-100%)';
-    } else if (currentScroll < lastScroll && header.classList.contains('scroll-down')) {
-        // 向上滾動
+    } else {
         header.style.transform = 'translateY(0)';
     }
-    
-    lastScroll = currentScroll;
+    lastScrollTop = scrollTop;
 });
 
 // 添加頁面載入動畫
@@ -40,49 +29,95 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // 添加滾動顯示動畫
     const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
     };
     
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('fade-in');
+                entry.target.classList.add('visible');
                 observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
     
     // 觀察所有需要動畫的元素
-    document.querySelectorAll('.about-content, .project-card, .contact-content').forEach(el => {
-        observer.observe(el);
+    document.querySelectorAll('section').forEach(section => {
+        section.classList.add('fade-up');
+        observer.observe(section);
     });
 });
 
 // 添加技能標籤動畫
-document.querySelectorAll('.skill-tag').forEach(tag => {
-    tag.addEventListener('mouseover', () => {
-        tag.style.transform = 'scale(1.1)';
-        tag.style.backgroundColor = 'var(--primary-color)';
-        tag.style.color = 'white';
-    });
-    
-    tag.addEventListener('mouseout', () => {
-        tag.style.transform = 'scale(1)';
-        tag.style.backgroundColor = '';
-        tag.style.color = '';
-    });
+const skillTags = document.querySelectorAll('.skill-tag');
+skillTags.forEach((tag, index) => {
+    tag.style.animationDelay = `${index * 100}ms`;
 });
 
 // 添加專案卡片懸停效果
-document.querySelectorAll('.project-card').forEach(card => {
-    card.addEventListener('mouseenter', () => {
-        card.style.transform = 'translateY(-10px)';
-        card.style.boxShadow = '0 15px 30px rgba(0, 0, 0, 0.1)';
+document.querySelectorAll('.featured-project').forEach(project => {
+    const image = project.querySelector('.project-image');
+    
+    project.addEventListener('mouseenter', () => {
+        image.style.transform = 'scale(1.05)';
     });
     
-    card.addEventListener('mouseleave', () => {
-        card.style.transform = 'translateY(0)';
-        card.style.boxShadow = '';
+    project.addEventListener('mouseleave', () => {
+        image.style.transform = 'scale(1)';
     });
+});
+
+// 添加打字機效果
+function typeWriter(element, text, speed = 50) {
+    let i = 0;
+    element.textContent = '';
+    
+    function type() {
+        if (i < text.length) {
+            element.textContent += text.charAt(i);
+            i++;
+            setTimeout(type, speed);
+        }
+    }
+    
+    type();
+}
+
+// 在頁面加載時應用打字機效果
+window.addEventListener('load', () => {
+    const greeting = document.querySelector('.greeting');
+    if (greeting) {
+        typeWriter(greeting, greeting.textContent);
+    }
+});
+
+// 添加暗色主題切換
+const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+const currentTheme = localStorage.getItem('theme');
+
+if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
+    document.body.classList.add('dark-theme');
+}
+
+// 添加平滑滾動到頂部按鈕
+const scrollToTopButton = document.createElement('button');
+scrollToTopButton.innerHTML = '↑';
+scrollToTopButton.className = 'scroll-to-top';
+document.body.appendChild(scrollToTopButton);
+
+scrollToTopButton.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+
+window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 100) {
+        scrollToTopButton.classList.add('visible');
+    } else {
+        scrollToTopButton.classList.remove('visible');
+    }
 }); 
